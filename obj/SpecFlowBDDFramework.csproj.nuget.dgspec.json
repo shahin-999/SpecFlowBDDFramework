@@ -1,0 +1,125 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\BS981\\OneDrive - Brain Station 23 Ltd\\Learning\\Selenium - CS\\SpecFlowBDDFramework\\SpecFlowBDDFramework.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\BS981\\OneDrive - Brain Station 23 Ltd\\Learning\\Selenium - CS\\SpecFlowBDDFramework\\SpecFlowBDDFramework.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\BS981\\OneDrive - Brain Station 23 Ltd\\Learning\\Selenium - CS\\SpecFlowBDDFramework\\SpecFlowBDDFramework.csproj",
+        "projectName": "SpecFlowBDDFramework",
+        "projectPath": "C:\\Users\\BS981\\OneDrive - Brain Station 23 Ltd\\Learning\\Selenium - CS\\SpecFlowBDDFramework\\SpecFlowBDDFramework.csproj",
+        "packagesPath": "C:\\Users\\BS981\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BS981\\OneDrive - Brain Station 23 Ltd\\Learning\\Selenium - CS\\SpecFlowBDDFramework\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\BS981\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nccoit.pkgs.visualstudio.com/_packaging/ncco-nuget/nuget/v3/index.json": {},
+          "https://nccoit.visualstudio.com/DepartmentPlanning/_artifacts/feed/ncco-nuget": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "ExtentReports": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[6.12.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.9.0, )"
+            },
+            "Microsoft.Office.Interop.Excel": {
+              "target": "Package",
+              "version": "[15.0.4795.1000, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.21.0, )"
+            },
+            "SpecFlow.NUnit": {
+              "target": "Package",
+              "version": "[3.9.74, )"
+            },
+            "SpecFlow.Plus.LivingDocPlugin": {
+              "target": "Package",
+              "version": "[3.9.57, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
+            "nunit": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.30, 6.0.30]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.30, 6.0.30]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.30, 6.0.30]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.316\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
