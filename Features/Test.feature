@@ -13,6 +13,3 @@ Scenario: Navigate to the login page-1
 	Given Navigate to the home page
 	When Click on the login url
 	Then Verify that the login page is visible
-
-Scenario: kdsjf
-	Given Navigate to the home page

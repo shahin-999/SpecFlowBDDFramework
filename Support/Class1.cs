@@ -19,6 +19,7 @@ namespace SpecFlowBDDFramework.Support
 		[Test]
 		public void DemoTest()
 		{
+			string rootPath = HelperUtility.GetInstance().GetProjectRootPath();
 			string e = EnvReader.GetInstance().GetEnvType();
 			Console.WriteLine(e);
 			Console.WriteLine(ConfigReader.GetInstance().GetBaseUrl());
@@ -27,14 +28,23 @@ namespace SpecFlowBDDFramework.Support
 			Console.WriteLine(ConfigReader.GetInstance().IsHeadless());
 			Console.WriteLine(ConfigReader.GetInstance().ImplicitWait());
 
-			ExcelReader excelReader = new ExcelReader(@"C:/Users/BS981/OneDrive - Brain Station 23 Ltd/Learning/Selenium - CS/SpecFlowBDDFramework/TestData/New XLSX Worksheet.xlsx");
-			Console.WriteLine($"Row number: {excelReader.GetRowCount("Sheet1")}");
+			string excelPath = Path.Combine(rootPath, "TestData\\New XLSX Worksheet.xlsx");
+			ExcelReader excelReader = new ExcelReader(excelPath);
+			Console.WriteLine($"Row count sheet1 = {excelReader.GetRowCount("Sheet1")}");
+			Console.WriteLine($"Row count sheet2 = {excelReader.GetRowCount("Sheet2")}");
+			Console.WriteLine($"Last row number sheet1 = {excelReader.GetLastRowNumber("Sheet1")}");
+			Console.WriteLine($"Last row number sheet2 = {excelReader.GetLastRowNumber("Sheet2")}");
+
+			string a = excelReader.ReadCellData("Sheet1",2, "Column-33");
+			Console.WriteLine(a);
+			a = excelReader.ReadCellData("Sheet1", 2, 200);
+			Console.WriteLine(a);
 
 			string jsonFilePath = "TestData\\TestData.json";
-			string rootPath = HelperUtility.GetInstance().GetProjectRootPath();
+			
 			string _jsonFilePath = Path.Combine(rootPath, jsonFilePath);
 			Console.WriteLine(_jsonFilePath);
-
+			excelReader.CreateSheet
 			try
 			{
 				Person person = JSONFileReader.ReadJsonFile<Person>(_jsonFilePath);

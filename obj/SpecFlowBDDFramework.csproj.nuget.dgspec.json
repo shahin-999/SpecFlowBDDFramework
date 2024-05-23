@@ -42,6 +42,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.7.5, )"
+            },
             "ExtentReports": {
               "target": "Package",
               "version": "[4.1.0, )"
@@ -53,10 +57,6 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.9.0, )"
-            },
-            "Microsoft.Office.Interop.Excel": {
-              "target": "Package",
-              "version": "[15.0.4795.1000, )"
             },
             "NUnit3TestAdapter": {
               "target": "Package",
