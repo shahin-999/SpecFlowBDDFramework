@@ -639,7 +639,6 @@ C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBD
 C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
 C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
 C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\Microsoft.Net.Http.Headers.dll
-C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\Microsoft.Office.Interop.Excel.dll
 C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\Microsoft.TestPlatform.CoreUtilities.dll
 C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\Microsoft.TestPlatform.PlatformAbstractions.dll
 C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
@@ -747,4 +746,13 @@ C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBD
 C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\obj\Debug\net6.0\ref\SpecFlowBDDFramework.dll
 C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\LivingDoc.Dtos.dll
 C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\LivingDoc.SpecFlowPlugin.dll
-C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\TestData\New XLSX Worksheet.xlsx
+C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\EPPlus.dll
+C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\System.Xml.XPath.XmlDocument.dll
+C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\BS981\OneDrive - Brain Station 23 Ltd\Learning\Selenium - CS\SpecFlowBDDFramework\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll
