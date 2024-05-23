@@ -29,7 +29,7 @@ namespace SpecFlowBDDFramework.Support
 			Console.WriteLine(ConfigReader.GetInstance().ImplicitWait());
 
 			string excelPath = Path.Combine(rootPath, "TestData\\New XLSX Worksheet.xlsx");
-			ExcelReader excelReader = new ExcelReader(excelPath);
+			/*ExcelReader_EPPlus excelReader = new ExcelReader_EPPlus(excelPath);
 			Console.WriteLine($"Row count sheet1 = {excelReader.GetRowCount("Sheet1")}");
 			Console.WriteLine($"Row count sheet2 = {excelReader.GetRowCount("Sheet2")}");
 			Console.WriteLine($"Last row number sheet1 = {excelReader.GetLastRowNumber("Sheet1")}");
@@ -38,13 +38,28 @@ namespace SpecFlowBDDFramework.Support
 			string a = excelReader.ReadCellData("Sheet1",2, "Column-33");
 			Console.WriteLine(a);
 			a = excelReader.ReadCellData("Sheet1", 2, 200);
-			Console.WriteLine(a);
+			Console.WriteLine(a);*/
+
+			ExcelReader excelReader = new ExcelReader(excelPath);
+			Console.WriteLine($"Row count sheet1 = {excelReader.GetRowCount("Sheet1")}");
+			Console.WriteLine($"Row count sheet2 = {excelReader.GetRowCount("Sheet2")}");
+			/*Console.WriteLine($"Last row number sheet1 = {excelReader.GetRowCount("Sheet1")}");
+			Console.WriteLine($"Last row number sheet2 = {excelReader.GetLastRowNumber("Sheet2")}");*/
+
+			string a = excelReader.ReadCell( 2, 5, "Sheet1");
+			Console.WriteLine($"A1: {a}");
+			a = excelReader.ReadCell(2, 5, "Sheet1");
+			Console.WriteLine($"2:4 of s1 {a}");
+
+			//List<string> list = new List<string> { "Shahin", "Afrin"};
+			//excelReader.CreateSheet("Hello1", list);
+			//Console.WriteLine(excelReader.ReadCellData("Hello1", 1, 2));
 
 			string jsonFilePath = "TestData\\TestData.json";
 			
 			string _jsonFilePath = Path.Combine(rootPath, jsonFilePath);
 			Console.WriteLine(_jsonFilePath);
-			excelReader.CreateSheet
+
 			try
 			{
 				Person person = JSONFileReader.ReadJsonFile<Person>(_jsonFilePath);

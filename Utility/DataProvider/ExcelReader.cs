@@ -1,182 +1,162 @@
-﻿using OfficeOpenXml;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace SpecFlowBDDFramework.Utility.DataProvider
 {
 	public class ExcelReader
 	{
-		string filePath;
+		private string _filePath;
+
 		public ExcelReader(string filePath)
 		{
-			this.filePath = filePath;
-			// Ensure the EPPlus license context is set.
-			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+			_filePath = filePath;
 		}
 
-		#region Get Row and Column Count
 		public int GetRowCount(string sheetName)
 		{
-			using (var package = new ExcelPackage(new FileInfo(filePath)))
+			int count = 0;
+
+			using (SpreadsheetDocument document = SpreadsheetDocument.Open(_filePath, false))
 			{
-				var worksheet = package.Workbook.Worksheets[sheetName];
-				if (worksheet == null || worksheet.Dimension == null)
+				WorkbookPart workbookPart = document.WorkbookPart;
+				Sheet sheet = workbookPart.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.Name == sheetName);
+				if (sheet != null)
 				{
-					return 0; // No such worksheet or no data
+					WorksheetPart worksheetPart = (WorksheetPart)workbookPart.GetPartById(sheet.Id);
+					count = worksheetPart.Worksheet.Descendants<Row>().Count();
 				}
-				return worksheet.Dimension.Rows;
 			}
+
+			return count;
 		}
 
-		public int GetLastRowNumber(string sheetName)
+		public List<string> ReadRow(int rowIndex, string sheetName)
 		{
-			using (var package = new ExcelPackage(new FileInfo(filePath)))
+			List<string> rowData = new List<string>();
+
+			using (SpreadsheetDocument document = SpreadsheetDocument.Open(_filePath, false))
 			{
-				var worksheet = package.Workbook.Worksheets[sheetName];
-				if (worksheet == null || worksheet.Dimension == null)
+				WorkbookPart workbookPart = document.WorkbookPart;
+				Sheet sheet = workbookPart.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.Name == sheetName);
+				if (sheet != null)
 				{
-					return 0; // No such worksheet or no data
-				}
-				return worksheet.Dimension.End.Row;
-			}
-		}
-
-		public int GetColumnCount(string sheetName)
-		{
-			using (var package = new ExcelPackage(new FileInfo(filePath)))
-			{
-				var worksheet = package.Workbook.Worksheets[sheetName];
-				if (worksheet == null || worksheet.Dimension == null)
-				{
-					return 0; // No such worksheet or no data
-				}
-
-				return worksheet.Dimension.Columns;
-			}
-		}
-
-		#endregion
-
-		#region Read Cell Data
-		public string ReadCellData(string sheetName, int row, int column)
-		{
-			using (var package = new ExcelPackage(new FileInfo(filePath)))
-			{
-				var worksheet = package.Workbook.Worksheets[sheetName];
-				return worksheet.Cells[row, column].Text;
-			}
-		}
-
-		public string ReadCellData(string sheetName, int rowNumber, string columnName)
-		{
-			using (var package = new ExcelPackage(new FileInfo(filePath)))
-			{
-				var worksheet = package.Workbook.Worksheets[sheetName];
-				if (worksheet == null || worksheet.Dimension == null)
-				{
-					return null; // No such worksheet or no data
-				}
-
-				// Find the column index corresponding to the given column name
-				int columnIndex = -1;
-				for (int col = worksheet.Dimension.Start.Column; col <= worksheet.Dimension.End.Column; col++)
-				{
-					if (worksheet.Cells[1, col].Text == columnName)
+					WorksheetPart worksheetPart = (WorksheetPart)workbookPart.GetPartById(sheet.Id);
+					Row row = worksheetPart.Worksheet.Descendants<Row>().ElementAtOrDefault(rowIndex);
+					if (row != null)
 					{
-						columnIndex = col;
-						break;
+						foreach (Cell cell in row.Elements<Cell>())
+						{
+							rowData.Add(GetCellValue(cell, workbookPart));
+						}
 					}
 				}
-
-				if (columnIndex == -1)
-				{
-					return null; // Column name not found
-				}
-
-				// Return the cell data using row number and column index
-				return worksheet.Cells[rowNumber, columnIndex].Text;
 			}
+
+			return rowData;
 		}
 
-		#endregion
-
-		#region Write Cell Data
-		public void WriteCellData(string sheetName, int row, int column, string value)
+		public string ReadCell(int rowIndex, int columnIndex, string sheetName)
 		{
-			using (var package = new ExcelPackage(new FileInfo(filePath)))
-			{
-				var worksheet = package.Workbook.Worksheets[sheetName];
-				worksheet.Cells[row, column].Value = value;
-				package.Save();
-			}
-		}
+			string cellData = null;
 
-		public void WriteCellData(string sheetName, int rowNumber, string columnName, string value)
-		{
-			using (var package = new ExcelPackage(new FileInfo(filePath)))
+			using (SpreadsheetDocument document = SpreadsheetDocument.Open(_filePath, false))
 			{
-				var worksheet = package.Workbook.Worksheets[sheetName];
-				if (worksheet == null || worksheet.Dimension == null)
+				WorkbookPart workbookPart = document.WorkbookPart;
+				Sheet sheet = workbookPart.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.Name == sheetName);
+				if (sheet != null)
 				{
-					throw new InvalidOperationException("Worksheet does not exist or has no data.");
-				}
-
-				// Find the column index corresponding to the given column name
-				int columnIndex = -1;
-				for (int col = worksheet.Dimension.Start.Column; col <= worksheet.Dimension.End.Column; col++)
-				{
-					if (worksheet.Cells[1, col].Text == columnName)
+					WorksheetPart worksheetPart = (WorksheetPart)workbookPart.GetPartById(sheet.Id);
+					Row row = worksheetPart.Worksheet.Descendants<Row>().ElementAtOrDefault(rowIndex);
+					if (row != null)
 					{
-						columnIndex = col;
-						break;
+						Cell cell = row.Elements<Cell>().ElementAtOrDefault(columnIndex);
+						if (cell != null)
+						{
+							cellData = GetCellValue(cell, workbookPart);
+						}
 					}
 				}
-
-				if (columnIndex == -1)
-				{
-					throw new ArgumentException("Column name not found in the worksheet.");
-				}
-
-				// Write the value to the cell using row number and column index
-				worksheet.Cells[rowNumber, columnIndex].Value = value;
-				package.Save();
 			}
+
+			return cellData;
 		}
 
-		#endregion
-
-		#region Create Sheet
-
-		/// <summary>
-		/// List *LIST TYPE* columns = new List *LIST TYPE* { "Name", "Age", "Email" };
-		/// </summary>
-
-		public void CreateSheet(string sheetName, List<string> columnNames)
+		public void WriteData(int rowIndex, int columnIndex, string data, string sheetName)
 		{
-			using (var package = new ExcelPackage(new FileInfo(filePath)))
+			using (SpreadsheetDocument document = SpreadsheetDocument.Open(_filePath, true))
 			{
-				// Check if the sheet already exists
-				if (package.Workbook.Worksheets.Any(sheet => sheet.Name == sheetName))
+				WorkbookPart workbookPart = document.WorkbookPart;
+				Sheet sheet = workbookPart.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.Name == sheetName);
+				if (sheet != null)
 				{
-					throw new InvalidOperationException($"Sheet '{sheetName}' already exists.");
+					WorksheetPart worksheetPart = (WorksheetPart)workbookPart.GetPartById(sheet.Id);
+					Row row = worksheetPart.Worksheet.Descendants<Row>().ElementAtOrDefault(rowIndex);
+					Cell cell = row.Elements<Cell>().ElementAtOrDefault(columnIndex);
+					if (cell == null)
+					{
+						cell = InsertCellInWorksheet(worksheetPart, columnIndex, row);
+					}
+					cell.CellValue = new CellValue(data);
+					cell.DataType = new EnumValue<CellValues>(CellValues.String);
+					worksheetPart.Worksheet.Save();
 				}
-
-				// Add a new worksheet
-				ExcelWorksheet worksheet = package.Workbook.Worksheets.Add(sheetName);
-
-				// Add column headers
-				for (int i = 0; i < columnNames.Count; i++)
-				{
-					worksheet.Cells[1, i + 1].Value = columnNames[i];
-				}
-
-				// Save the changes to the Excel file
-				package.Save();
 			}
 		}
 
-		#endregion
+		private Cell InsertCellInWorksheet(WorksheetPart worksheetPart, int columnIndex, Row row)
+		{
+			Cell refCell = null;
+			foreach (Cell cell in row.Elements<Cell>())
+			{
+				if (string.Compare(GetColumnName(cell.CellReference.Value), GetColumnName(columnIndex)) > 0)
+				{
+					refCell = cell;
+					break;
+				}
+			}
 
-		#region Delete Row Data /*TODO*/
+			Cell newCell = new Cell() { CellReference = GetColumnName(columnIndex) + row.RowIndex };
+			worksheetPart.Worksheet.Descendants<Row>().Where(r => r.RowIndex == row.RowIndex).FirstOrDefault().InsertBefore(newCell, refCell);
+			worksheetPart.Worksheet.Save();
 
-		#endregion
+			return newCell;
+		}
+
+		private string? GetColumnName(string? value)
+		{
+			throw new NotImplementedException();
+		}
+
+		private string GetCellValue(Cell cell, WorkbookPart workbookPart)
+		{
+			string value = cell.InnerText;
+			if (cell.DataType != null && cell.DataType.Value == CellValues.SharedString)
+			{
+				SharedStringTablePart stringTablePart = workbookPart.GetPartsOfType<SharedStringTablePart>().FirstOrDefault();
+				if (stringTablePart != null)
+				{
+					value = stringTablePart.SharedStringTable.ElementAt(int.Parse(value)).InnerText;
+				}
+			}
+			return value;
+		}
+
+		private string GetColumnName(int columnIndex)
+		{
+			int dividend = columnIndex;
+			string columnName = String.Empty;
+			int modifier;
+
+			while (dividend > 0)
+			{
+				modifier = (dividend - 1) % 26;
+				columnName = Convert.ToChar(65 + modifier).ToString() + columnName;
+				dividend = (int)((dividend - modifier) / 26);
+			}
+
+			return columnName;
+		}
+
 	}
 }
