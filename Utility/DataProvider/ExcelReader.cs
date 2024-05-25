@@ -31,7 +31,7 @@ namespace SpecFlowBDDFramework.Utility.DataProvider
 			return count;
 		}
 
-		public List<string> ReadRow(int rowIndex, string sheetName)
+		public List<string> ReadRow(string sheetName, int rowIndex)
 		{
 			List<string> rowData = new List<string>();
 
@@ -56,7 +56,7 @@ namespace SpecFlowBDDFramework.Utility.DataProvider
 			return rowData;
 		}
 
-		public string ReadCell(int rowIndex, int columnIndex, string sheetName)
+		public string ReadCellData(string sheetName, int columnIndex, int rowIndex)
 		{
 			string cellData = null;
 
@@ -82,7 +82,7 @@ namespace SpecFlowBDDFramework.Utility.DataProvider
 			return cellData;
 		}
 
-		public void WriteData(int rowIndex, int columnIndex, string data, string sheetName)
+		public void WriteData(string sheetName, int columnIndex, int rowIndex, string data)
 		{
 			using (SpreadsheetDocument document = SpreadsheetDocument.Open(_filePath, true))
 			{
